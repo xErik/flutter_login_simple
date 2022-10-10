@@ -3,13 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_simple/authmodelpublic.dart';
 import 'package:flutter_login_simple/main.dart';
-import 'package:flutter_login_simple/_demo/firebase_options.dart';
+import 'package:flutter_login_simple_demo/firebase_options.dart';
 
 void main() async {
   // ----------------------------------------
   // Initialize Firebase Core.
   //
-  // The flutter_login_simple will use it to authenticate.
+  // The flutter_login_simple/ will use it to authenticate.
   // ----------------------------------------
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -59,10 +59,10 @@ class StartPage extends StatelessWidget {
 
     // Gets triggered in succesful login
     onLoginSuccess(UserSessionData user) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
+          (Route<dynamic> route) => false);
     }
 
     // The Terms of Service (as HTML) shown in a fullscreen dialog.
@@ -138,10 +138,10 @@ class LoginSuccessPage extends StatelessWidget {
 
   // Helper method
   _goHome(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const StartPage()),
-    );
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const StartPage()),
+        (Route<dynamic> route) => false);
   }
 }
 ```

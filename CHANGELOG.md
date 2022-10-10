@@ -4,4 +4,8 @@
 
 ## [0.0.2] - [October 10 2022].
 
-* Fixing README
+* Fixed README
+
+## [0.0.3] - [October 10 2022].
+
+* README, minor navigation issue 

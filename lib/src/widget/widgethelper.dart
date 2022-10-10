@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
+import 'package:flutter_login_simple/src/widget/resendbutton.dart';
 import 'package:get/get.dart';
 
 class WidgetHelper extends StatelessWidget {
@@ -9,30 +10,6 @@ class WidgetHelper extends StatelessWidget {
   final List<Widget> children = <Widget>[];
 
   WidgetHelper({super.key});
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return LayoutBuilder(builder: (BuildContext ctx, BoxConstraints box) {
-  //     return Center(
-  //         child: ListView(
-  //             padding: const EdgeInsets.all(16),
-  //             shrinkWrap: true,
-  //             children: [
-  //           Center(
-  //               child: ConstrainedBox(
-  //                   constraints: const BoxConstraints(
-  //                     maxWidth: 400,
-  //                     minWidth: 250, // @todo is not respected
-  //                   ),
-  // child: Card(
-  //     child: Padding(
-  //         padding: const EdgeInsets.all(16),
-  //         child: Form(
-  //                               key: service.formKey,
-  //                               child: Column(children: children))))))
-  //         ]));
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -205,6 +182,19 @@ class WidgetHelper extends StatelessWidget {
   get buttonPassword =>
       _loadingButton('Reset Password', service.onPasswordForgotten);
   get buttonCode => _loadingButton('Confirm Code', service.onPasswordCode);
+
+  get buttonResend {
+    return Obx(
+      () => service.isShowResendButton.isFalse
+          ? const SizedBox.shrink()
+          : Column(
+              children: [
+                ResendButton(),
+                spacerLarge,
+              ],
+            ),
+    );
+  }
 
   // -------------------------------------------------------------
   // TEXTS

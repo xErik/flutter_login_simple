@@ -34,6 +34,8 @@ class ScreenService extends GetxService {
 
   var isAsyncTaskButton = false.obs;
 
+  var isShowResendButton = false.obs;
+
   late StreamSubscription<User?> sub;
 
   final TextEditingController emailController = TextEditingController();
@@ -57,6 +59,7 @@ class ScreenService extends GetxService {
 
   ScreenService(Image logoInit, Function onLoginSuccessInit, String htmlTocInit,
       String htmlPrivacyInit) {
+    screenState.value = ScreenState.login;
     logo = logoInit;
     onLoginSuccess = onLoginSuccessInit;
     htmlToc = htmlTocInit;
@@ -65,8 +68,13 @@ class ScreenService extends GetxService {
 
   /// Gets called from [AuthService] if login is already existing.
   autoLogin(UserSessionData user) {
-    resetInfoAndError();
+    resetInfoAndError(clearEmail: true);
+
+    // Preventing: Error: Looking up a deactivated widget's ancestor is unsafe.
+    // Wait for completing the state.
+    // SchedulerBinding.instance.addPostFrameCallback((_) {
     onLoginSuccess.call(user);
+    // });
   }
 
   // -------------------------------------------------------------
@@ -94,12 +102,16 @@ class ScreenService extends GetxService {
   }
 
   /// Clears Errors and Infos on screen navigation.
-  resetInfoAndError() {
+  resetInfoAndError({clearEmail = false}) {
+    isShowResendButton.value = false;
     feedbackHint.value = '';
     feedbackError.value = '';
     passwordController.text = '';
     passwordConfirmController.text = '';
     codeController.text = '';
+    if (clearEmail) {
+      emailController.text = '';
+    }
   }
 
   Future<void> onSignup() async {
@@ -124,6 +136,12 @@ class ScreenService extends GetxService {
     }
   }
 
+  Future<void> onSendEmailVerification() async {
+    await sAuth.sendEmailVerification();
+    // isShowResendButton.value = false;
+    log('FORM RESEND EMAIL');
+  }
+
   Future<void> onLogin() async {
     if (formKey.currentState!.validate()) {
       log('FORM LOGIN OK');
@@ -138,6 +156,7 @@ class ScreenService extends GetxService {
       } else {
         data = (data as UserSessionException);
         feedbackError.value = '${data.errorMessage} (${data.errorCode})';
+        isShowResendButton.value = true;
         _warningFirebaseNotReady(data);
       }
     } else {

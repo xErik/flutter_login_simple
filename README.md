@@ -2,22 +2,25 @@
 
 A basic login for Firebase Authentication by email.
 
-Handles the UI and Firebase Authentication in the background. It has to be initialized with:
+Handles the UI and Firebase Authentication in the background. In case the user is aready logged in, the user the suceess-login callback function will be called.
+
+It has to be initialized with:
 
 - Image logo
 - Callback function on succesful login
 - Privacy HTML
 - Terms of Service HTML
 
-The callback receives user data (`uid`, `email`, ...). It also allows for calls like `user.logout()` and `user.delete()`.
+The callback receives user data:
+- `uid`
+- `email`
+-  ...
 
-In case the user is aready logged in, the user the suceess-login callback function will be called.
+It also allows for calls like 
+- `user.logout()`
+- `user.delete()`
 
-**Run the example**
 
-The example directory contains a working Flutter app. Add your Firebase config before running it: `lib/firebase_options.dart`.
-
-Make sure to enable Firebase Authentication for Email in the Firebase Console. Forgetting to do so is a common pitfall.
 
 ![Demo](assets/demo.gif "Demo")
 
@@ -28,6 +31,13 @@ Add more login options and potentially theming.
 ## Installation
 
 `flutter pub get flutter_login_simple`
+
+
+## Run the example
+
+The example directory contains a working Flutter app. Add your Firebase config before running it: `lib/firebase_options.dart`.
+
+Make sure to enable Firebase Authentication for Email in the Firebase Console. Forgetting to do so is a common pitfall.
 
 ## Basic usage
 
@@ -42,11 +52,10 @@ Image logo = Image.network(
 
 // Your callback will get executed on successful login.
 onLoginSuccess(UserSessionData user) {
-    Navigator.push(
-      context,
+  Navigator.pushAndRemoveUntil(context,
       MaterialPageRoute(builder: (context) 
         => LoginSuccessPage(user)),
-    );
+      (Route<dynamic> route) => false);
 }
 
 // Your Terms of Service

@@ -44,7 +44,7 @@ class AuthService extends GetxService {
     // return UserSessionData(user);
   }
 
-  _sendEmailVerification() async {
+  sendEmailVerification() async {
     await _firebaseAuth.currentUser?.sendEmailVerification();
     log('Email verification sent', name: runtimeType.toString());
   }
@@ -78,9 +78,9 @@ class AuthService extends GetxService {
           .signInWithEmailAndPassword(email: email, password: password);
 
       if (credential.user!.emailVerified == false) {
-        log('User login in failed: email is not verified ${credential.user!.emailVerified}',
+        log('User login failed: email is not verified ${credential.user!.emailVerified}',
             name: runtimeType.toString());
-        await _sendEmailVerification();
+        // await _sendEmailVerification();
         return UserSessionException('email-not-verified',
             'Please confirm your email address by clicking the link in the verification email you received. Check your spam folder, too.');
       }
@@ -107,7 +107,7 @@ class AuthService extends GetxService {
         email: email,
         password: password,
       );
-      await _sendEmailVerification();
+      await sendEmailVerification();
       log('Create user', name: runtimeType.toString());
       return _userFromFirebase(credential.user);
     } on FirebaseAuthException catch (e) {

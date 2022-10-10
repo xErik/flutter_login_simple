@@ -12,6 +12,7 @@ class Login extends WidgetHelper {
       spacerLargeLarge,
       feedbackError,
       feedbackHint,
+      buttonResend,
       loginHeader,
       spacerLarge,
       email,

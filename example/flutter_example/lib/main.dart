@@ -56,12 +56,12 @@ class StartPage extends StatelessWidget {
     Image logo = Image.network(
         'https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png');
 
-    // Gets triggered in succesful login
+    // Gets triggered on succesful login
     onLoginSuccess(UserSessionData user) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
+          (Route<dynamic> route) => false);
     }
 
     // The Terms of Service (as HTML) shown in a fullscreen dialog.
@@ -137,9 +137,9 @@ class LoginSuccessPage extends StatelessWidget {
 
   // Helper method
   _goHome(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const StartPage()),
-    );
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const StartPage()),
+        (Route<dynamic> route) => false);
   }
 }
