@@ -1,0 +1,48 @@
+name: flutter_login_simple
+description: Simple Flutter Firebase Authentication widget.
+repository: https://github.com/xErik/flutter_login_simple
+issue_tracker: https://github.com/xErik/flutter_login_simple/issues
+version: 0.0.1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.5
+  firebase_auth: ^3.11.1
+  firebase_auth_web: ^4.6.0
+  flutter_widget_from_html_core: ^0.8.5+3
+  firebase_core: ^1.24.0
+  firebase_core_web: ^1.7.3
+  firebase_auth_desktop: ^1.0.2
+  firebase_core_desktop: ^1.0.2
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
