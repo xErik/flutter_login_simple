@@ -11,7 +11,7 @@ Handles the UI and Firebase Authentication in the background. It has to be initi
 
 The callback receives user data (`uid`, `email`, ...). It also allows for calls like `user.logout()` and `user.delete()`.
 
-A live demo can be found here: [https://xerik.github.io/flutter_login_simple/](https://xerik.github.io/flutter_login_simple/).
+![Demo](assets/demo.gif "Demo")
 
 ## Outlook
 
