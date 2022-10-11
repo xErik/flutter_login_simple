@@ -20,7 +20,7 @@ enum ScreenState {
 }
 
 class ScreenService extends GetxService {
-  final sAuth = Get.find<AuthService>();
+  final sAuth = Get.put(AuthService());
   // late final Image logo;
   // late final Function onLoginSuccess;
   late final Worker worker;
@@ -32,7 +32,7 @@ class ScreenService extends GetxService {
   var feedbackError = ''.obs;
   // var htmlToc = '<h1>ToC</h1><h2> headline 2</h2><b>lal la la</b>';
   // var htmlPrivacy = '<h1>Privacy</h1><h2> headline 2</h2><b>lal la la</b>';
-  LoginStarterConfiguration config;
+  FlutterLoginConfiguration config;
 
   var isAsyncTaskButton = false.obs;
 
@@ -152,7 +152,11 @@ class ScreenService extends GetxService {
       } else {
         data = (data as UserSessionException);
         feedbackError.value = '${data.errorMessage} (${data.errorCode})';
-        isShowResendButton.value = true;
+        if (data.errorCode == 'email-not-verified') {
+          isShowResendButton.value = true;
+        } else {
+          isShowResendButton.value = false;
+        }
         _warningFirebaseNotReady(data);
       }
     } else {

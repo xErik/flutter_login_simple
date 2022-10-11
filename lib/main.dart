@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/src/auth/authservice.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
 import 'package:flutter_login_simple/src/view/login.dart';
 import 'package:flutter_login_simple/src/view/passwordCode.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_login_simple/src/view/passwordForgotten.dart';
 import 'package:flutter_login_simple/src/view/signup.dart';
 import 'package:get/get.dart';
 
-class LoginStarterConfiguration {
+class FlutterLoginConfiguration {
   Image logo;
   Function onLoginSuccess;
   String htmlToc;
@@ -16,31 +15,17 @@ class LoginStarterConfiguration {
   bool disableSignUp;
   bool disablePasswordReset;
 
-  LoginStarterConfiguration(
+  FlutterLoginConfiguration(
       this.logo, this.onLoginSuccess, this.htmlToc, this.htmlPrivacy,
       {this.disableLogin = false,
       this.disableSignUp = false,
       this.disablePasswordReset = false});
 }
 
-class LoginStarter extends StatelessWidget {
-  final LoginStarterConfiguration config;
-  const LoginStarter(this.config, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Get.put(AuthService());
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MainPage(config),
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
+class FlutterLoginSimple extends StatelessWidget {
   late final ScreenService c;
 
-  MainPage(LoginStarterConfiguration config, {super.key}) {
+  FlutterLoginSimple(FlutterLoginConfiguration config, {super.key}) {
     c = Get.put(ScreenService(config));
   }
 

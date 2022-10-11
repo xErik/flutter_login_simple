@@ -72,7 +72,7 @@ class StartPage extends StatelessWidget {
     String htmlPrivacy = '<h1>Privacy Policy</h1>';
 
     var config =
-        LoginStarterConfiguration(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+        FlutterLoginConfiguration(logo, onLoginSuccess, htmlToc, htmlPrivacy);
 
     return LoginStarter(config);
   }

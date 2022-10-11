@@ -65,7 +65,7 @@ String htmlToc = '<h1>Terms of Service</h1>';
 String htmlPrivacy = '<h1>Privacy Policy</h1>';
 
 var config =
-  LoginStarterConfiguration(
+  FlutterLoginConfiguration(
     logo, 
     onLoginSuccess, 
     htmlToc, 
@@ -74,10 +74,10 @@ var config =
 return LoginStarter(config);
 ```
 
-All configuration options of `LoginStarterConfiguration`:
+All configuration options of `FlutterLoginConfiguration`:
 
 ```dart
-class LoginStarterConfiguration {
+class FlutterLoginConfiguration {
   Image logo;
   Function onLoginSuccess;
   String htmlToc;
@@ -86,7 +86,7 @@ class LoginStarterConfiguration {
   bool disableSignUp;
   bool disablePasswordReset;
 
-  LoginStarterConfiguration(
+  FlutterLoginConfiguration(
       this.logo, this.onLoginSuccess, this.htmlToc, this.htmlPrivacy,
       {this.disableLogin = false,
       this.disableSignUp = false,

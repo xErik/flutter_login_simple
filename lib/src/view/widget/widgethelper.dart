@@ -92,19 +92,21 @@ class WidgetHelper extends StatelessWidget {
   // -------------------------------------------------------------
 
   get feedbackError {
-    final color = Theme.of(Get.context!).colorScheme.error;
-    return Obx(() => service.feedbackError.isEmpty
-        ? const SizedBox.shrink()
-        : _feedback(
-            color, Icons.error_outline, 'Error', service.feedbackError.value));
+    return Builder(builder: (BuildContext context) {
+      return Obx(() => service.feedbackError.isEmpty
+          ? const SizedBox.shrink()
+          : _feedback(Theme.of(context).colorScheme.error, Icons.error_outline,
+              'Error', service.feedbackError.value));
+    });
   }
 
   get feedbackHint {
-    final color = Theme.of(Get.context!).colorScheme.tertiary;
-    return Obx(() => service.feedbackHint.isEmpty
-        ? const SizedBox.shrink()
-        : _feedback(
-            color, Icons.info_outline, 'Info', service.feedbackHint.value));
+    return Builder(builder: (BuildContext context) {
+      return Obx(() => service.feedbackHint.isEmpty
+          ? const SizedBox.shrink()
+          : _feedback(Theme.of(context).colorScheme.tertiary,
+              Icons.info_outline, 'Info', service.feedbackHint.value));
+    });
   }
 
   Widget _feedback(Color color, IconData icon, String title, String text) {
@@ -159,11 +161,13 @@ class WidgetHelper extends StatelessWidget {
   Widget _loadingButton(String label, Function func, bool isDisabled) {
     final loading =
         LayoutBuilder(builder: (BuildContext ctx, BoxConstraints con) {
-      return SizedBox(
-          width: con.maxHeight * 0.5,
-          height: con.maxHeight * 0.5,
-          child: CircularProgressIndicator(
-              color: Theme.of(Get.context!).colorScheme.onPrimary));
+      return Builder(builder: (BuildContext context) {
+        return SizedBox(
+            width: con.maxHeight * 0.5,
+            height: con.maxHeight * 0.5,
+            child: CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.onPrimary));
+      });
     });
 
     label = isDisabled ? '$label disabled' : label;
