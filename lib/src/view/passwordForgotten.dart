@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/src/widget/widgethelper.dart';
+import 'package:flutter_login_simple/src/view/widget/widgethelper.dart';
 
-class PasswordCode extends WidgetHelper {
-  PasswordCode({super.key});
+class PasswordForgotten extends WidgetHelper {
+  PasswordForgotten({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +12,18 @@ class PasswordCode extends WidgetHelper {
       spacerLargeLarge,
       feedbackError,
       feedbackHint,
-      passwordCodeHeader,
+      passwordForgottenHeader,
       spacerLarge,
-      passwordCode,
+      email,
       spacerLarge,
-      buttonCode,
+      // password,
+      // spacer,
+      // password2,
+      // // spacerLarge,
+      // spacerLarge,
+      // tocAndPrivacy,
+      // spacerLarge,
+      buttonPassword,
       spacerLarge,
       loginHint,
       spacer,

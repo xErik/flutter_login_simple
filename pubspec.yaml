@@ -2,7 +2,7 @@ name: flutter_login_simple
 description: Simple Flutter Firebase Authentication widget for email. Create, delete and reset password of account.
 repository: https://github.com/xErik/flutter_login_simple
 issue_tracker: https://github.com/xErik/flutter_login_simple/issues
-version: 0.0.3
+version: 0.1.1
 
 environment:
   sdk: '>=2.18.2 <3.0.0'

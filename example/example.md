@@ -57,7 +57,7 @@ class StartPage extends StatelessWidget {
     Image logo = Image.network(
         'https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png');
 
-    // Gets triggered in succesful login
+    // Gets triggered on succesful login
     onLoginSuccess(UserSessionData user) {
       Navigator.pushAndRemoveUntil(
           context,
@@ -71,7 +71,10 @@ class StartPage extends StatelessWidget {
     // The Privacy Policy (as HTML) shown in a fullscreen dialog.
     String htmlPrivacy = '<h1>Privacy Policy</h1>';
 
-    return LoginStarter(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+    var config =
+        LoginStarterConfiguration(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+
+    return LoginStarter(config);
   }
 }
 

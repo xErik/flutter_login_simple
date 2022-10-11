@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/src/widget/widgethelper.dart';
+import 'package:flutter_login_simple/src/view/widget/widgethelper.dart';
 
-class Login extends WidgetHelper {
-  Login({super.key});
+class Signup extends WidgetHelper {
+  Signup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +12,20 @@ class Login extends WidgetHelper {
       spacerLargeLarge,
       feedbackError,
       feedbackHint,
-      buttonResend,
-      loginHeader,
+      signupHeader,
       spacerLarge,
       email,
       spacer,
       password,
       spacer,
-      passwordHint,
-      spacer,
-      buttonLogin,
+      password2,
+      // spacerLarge,
       spacerLarge,
-      signupHint,
+      tocAndPrivacyHint,
+      spacerLarge,
+      buttonSignup,
+      spacerLarge,
+      loginHint,
     ]);
     return super.build(context);
   }

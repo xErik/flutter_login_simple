@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_simple/src/auth/authservice.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
-import 'package:flutter_login_simple/src/widget/login.dart';
-import 'package:flutter_login_simple/src/widget/passwordCode.dart';
-import 'package:flutter_login_simple/src/widget/passwordForgotten.dart';
-import 'package:flutter_login_simple/src/widget/signup.dart';
+import 'package:flutter_login_simple/src/view/login.dart';
+import 'package:flutter_login_simple/src/view/passwordCode.dart';
+import 'package:flutter_login_simple/src/view/passwordForgotten.dart';
+import 'package:flutter_login_simple/src/view/signup.dart';
 import 'package:get/get.dart';
 
-class LoginStarter extends StatelessWidget {
-  final String htmlToc;
-  final String htmlPrivacy;
-  final Function onLoginSuccess;
-  final Image logo;
-  const LoginStarter(
+class LoginStarterConfiguration {
+  Image logo;
+  Function onLoginSuccess;
+  String htmlToc;
+  String htmlPrivacy;
+  bool disableLogin;
+  bool disableSignUp;
+  bool disablePasswordReset;
+
+  LoginStarterConfiguration(
       this.logo, this.onLoginSuccess, this.htmlToc, this.htmlPrivacy,
-      {super.key});
+      {this.disableLogin = false,
+      this.disableSignUp = false,
+      this.disablePasswordReset = false});
+}
+
+class LoginStarter extends StatelessWidget {
+  final LoginStarterConfiguration config;
+  const LoginStarter(this.config, {super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(AuthService());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(logo, onLoginSuccess, htmlToc, htmlPrivacy),
+      home: MainPage(config),
     );
   }
 }
@@ -29,10 +40,8 @@ class LoginStarter extends StatelessWidget {
 class MainPage extends StatelessWidget {
   late final ScreenService c;
 
-  MainPage(
-      Image logo, Function onLoginSuccess, String htmlToc, String htmlPrivacy,
-      {super.key}) {
-    c = Get.put(ScreenService(logo, onLoginSuccess, htmlToc, htmlPrivacy));
+  MainPage(LoginStarterConfiguration config, {super.key}) {
+    c = Get.put(ScreenService(config));
   }
 
   @override

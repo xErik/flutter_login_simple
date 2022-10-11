@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
-import 'package:flutter_login_simple/src/widget/resendbutton.dart';
+import 'package:flutter_login_simple/src/view/widget/resendbutton.dart';
 import 'package:get/get.dart';
 
 class WidgetHelper extends StatelessWidget {
@@ -38,7 +38,7 @@ class WidgetHelper extends StatelessWidget {
   // LOGO
   // -------------------------------------------------------------
 
-  get logo => Center(child: SizedBox(height: 50, child: service.logo));
+  get logo => Center(child: SizedBox(height: 50, child: service.config.logo));
 
   // -------------------------------------------------------------
   // SPACERS
@@ -156,7 +156,7 @@ class WidgetHelper extends StatelessWidget {
   // -------------------------------------------------------------
 
   /// Returns a button, showing a self adjusting progress indicator.
-  Widget _loadingButton(String label, Function func) {
+  Widget _loadingButton(String label, Function func, bool isDisabled) {
     final loading =
         LayoutBuilder(builder: (BuildContext ctx, BoxConstraints con) {
       return SizedBox(
@@ -166,22 +166,27 @@ class WidgetHelper extends StatelessWidget {
               color: Theme.of(Get.context!).colorScheme.onPrimary));
     });
 
+    label = isDisabled ? '$label disabled' : label;
+
     return Obx(
       () => SizedBox(
           width: double.infinity,
           height: 40,
           child: ElevatedButton(
-            onPressed: () => func.call(),
+            onPressed: isDisabled ? null : () => func.call(),
             child: service.isAsyncTaskButton.isTrue ? loading : Text(label),
           )),
     );
   }
 
-  get buttonLogin => _loadingButton('Login', service.onLogin);
-  get buttonSignup => _loadingButton('Sign Up', service.onSignup);
-  get buttonPassword =>
-      _loadingButton('Reset Password', service.onPasswordForgotten);
-  get buttonCode => _loadingButton('Confirm Code', service.onPasswordCode);
+  get buttonLogin =>
+      _loadingButton('Login', service.onLogin, service.config.disableLogin);
+  get buttonSignup =>
+      _loadingButton('Sign Up', service.onSignup, service.config.disableSignUp);
+  get buttonPassword => _loadingButton('Reset Password',
+      service.onPasswordForgotten, service.config.disablePasswordReset);
+  get buttonCode =>
+      _loadingButton('Confirm Code', service.onPasswordCode, false);
 
   get buttonResend {
     return Obx(

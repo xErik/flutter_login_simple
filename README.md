@@ -64,27 +64,59 @@ String htmlToc = '<h1>Terms of Service</h1>';
 // Ypur Privacy Policy
 String htmlPrivacy = '<h1>Privacy Policy</h1>';
 
-return LoginStarter(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+var config =
+  LoginStarterConfiguration(
+    logo, 
+    onLoginSuccess, 
+    htmlToc, 
+    htmlPrivacy);
+
+return LoginStarter(config);
+```
+
+All configuration options of `LoginStarterConfiguration`:
+
+```dart
+class LoginStarterConfiguration {
+  Image logo;
+  Function onLoginSuccess;
+  String htmlToc;
+  String htmlPrivacy;
+  bool disableLogin;
+  bool disableSignUp;
+  bool disablePasswordReset;
+
+  LoginStarterConfiguration(
+      this.logo, this.onLoginSuccess, this.htmlToc, this.htmlPrivacy,
+      {this.disableLogin = false,
+      this.disableSignUp = false,
+      this.disablePasswordReset = false});
+}
 ```
 
 Accessing the returned `UserSessionData`:
 
 ```dart
-user is UserSessionData;
+onLoginSuccess(UserSessionData user) {
 
-print(user.uid);
-print(user.email ?? 'not given');
-print(user.displayName ?? 'not given');
-// ... and so on with all properties
+  print(user.uid);
+  print(user.email ?? 'not given');
+  print(user.displayName ?? 'not given');
+  print(user.emailVerified.toString());
+  print(user.isAnonymous.toString());
+  print(user.phoneNumber ?? 'not given');
+  print(user.photoURL ?? 'not given');
 
-// void return !
-await user.logoutUser(); 
 
-bool isSuccess = await user.deleteUser();
+  // returns VOID
+  await user.logoutUser(); 
 
-// The original Firebase Authentication user
-// for other use cases.
-var firebaseUser = user.firebaseUser();
+  bool isSuccess = await user.deleteUser();
+
+  // The original Firebase Authentication user 
+  // for other use cases.
+  var firebaseUser = user.firebaseUser();
+}
 ```
 
 ## Bugs and Requests

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_simple/authmodelpublic.dart';
 import 'package:flutter_login_simple/src/auth/authmodel.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
+import 'package:flutter_login_simple/usersessiondata.dart';
 import 'package:get/get.dart';
 
 /// Service talking to Firebase Authentication.

@@ -3,10 +3,11 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/authmodelpublic.dart';
+import 'package:flutter_login_simple/main.dart';
 import 'package:flutter_login_simple/src/auth/authmodel.dart';
 import 'package:flutter_login_simple/src/auth/authservice.dart';
-import 'package:flutter_login_simple/src/widget/modaldialog.dart';
+import 'package:flutter_login_simple/src/view/widget/modaldialog.dart';
+import 'package:flutter_login_simple/usersessiondata.dart';
 import 'package:get/get.dart';
 
 enum ScreenState {
@@ -20,8 +21,8 @@ enum ScreenState {
 
 class ScreenService extends GetxService {
   final sAuth = Get.find<AuthService>();
-  late final Image logo;
-  late final Function onLoginSuccess;
+  // late final Image logo;
+  // late final Function onLoginSuccess;
   late final Worker worker;
   final formKey = GlobalKey<FormState>();
   final screenState = ScreenState.login.obs;
@@ -29,8 +30,9 @@ class ScreenService extends GetxService {
   var isPasswordObscure2 = true.obs;
   var feedbackHint = ''.obs;
   var feedbackError = ''.obs;
-  var htmlToc = '<h1>ToC</h1><h2> headline 2</h2><b>lal la la</b>';
-  var htmlPrivacy = '<h1>Privacy</h1><h2> headline 2</h2><b>lal la la</b>';
+  // var htmlToc = '<h1>ToC</h1><h2> headline 2</h2><b>lal la la</b>';
+  // var htmlPrivacy = '<h1>Privacy</h1><h2> headline 2</h2><b>lal la la</b>';
+  LoginStarterConfiguration config;
 
   var isAsyncTaskButton = false.obs;
 
@@ -57,24 +59,18 @@ class ScreenService extends GetxService {
     super.onClose();
   }
 
-  ScreenService(Image logoInit, Function onLoginSuccessInit, String htmlTocInit,
-      String htmlPrivacyInit) {
-    screenState.value = ScreenState.login;
-    logo = logoInit;
-    onLoginSuccess = onLoginSuccessInit;
-    htmlToc = htmlTocInit;
-    htmlPrivacy = htmlPrivacyInit;
+  ScreenService(this.config) {
+    // in case the service is already in memory.
+    // @todo instantiating the service in a Get-Binding
+    // weired error: on logout the eamil-verification warning is there
+    resetInfoAndError(clearEmail: true);
   }
 
   /// Gets called from [AuthService] if login is already existing.
   autoLogin(UserSessionData user) {
+    log('auto login');
     resetInfoAndError(clearEmail: true);
-
-    // Preventing: Error: Looking up a deactivated widget's ancestor is unsafe.
-    // Wait for completing the state.
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    onLoginSuccess.call(user);
-    // });
+    config.onLoginSuccess.call(user);
   }
 
   // -------------------------------------------------------------
@@ -86,8 +82,8 @@ class ScreenService extends GetxService {
   void goPasswordForgotten() =>
       screenState.value = ScreenState.passwordForgotten;
   void goPasswordCode() => screenState.value = ScreenState.passwordCode;
-  void goToc() => ModalDialog.open(htmlToc);
-  void goPrivacy() => ModalDialog.open(htmlPrivacy);
+  void goToc() => ModalDialog.open(config.htmlToc);
+  void goPrivacy() => ModalDialog.open(config.htmlPrivacy);
 
   // -------------------------------------------------------------
   // FORM SUBMITS

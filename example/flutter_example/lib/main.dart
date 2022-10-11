@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/authmodelpublic.dart';
 import 'package:flutter_login_simple/main.dart';
+import 'package:flutter_login_simple/usersessiondata.dart';
 import 'package:flutter_login_simple_demo/firebase_options.dart';
 
 void main() async {
@@ -70,7 +70,10 @@ class StartPage extends StatelessWidget {
     // The Privacy Policy (as HTML) shown in a fullscreen dialog.
     String htmlPrivacy = '<h1>Privacy Policy</h1>';
 
-    return LoginStarter(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+    var config =
+        LoginStarterConfiguration(logo, onLoginSuccess, htmlToc, htmlPrivacy);
+
+    return LoginStarter(config);
   }
 }
 
