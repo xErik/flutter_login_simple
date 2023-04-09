@@ -17,3 +17,11 @@
 ## [0.1.1] - [October 11 2022].
 
 * Added configuration options 
+
+## [0.2.0] - [October 11 2022].
+
+* Renamed 
+
+## [1.0.0] - [April 09 2023].
+
+* Updated Firebase dependencies, removed firebase_desktop 
