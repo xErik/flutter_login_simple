@@ -60,8 +60,11 @@ class StartPage extends StatelessWidget {
     onLoginSuccess(UserSessionData user) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
-          (Route<dynamic> route) => false);
+          MaterialPageRoute(
+              builder: (BuildContext context) => LoginSuccessPage(user)),
+          ModalRoute.withName('/')
+          // (Route<dynamic> route) => false
+          );
     }
 
     // The Terms of Service (as HTML) shown in a fullscreen dialog.
@@ -118,6 +121,7 @@ class LoginSuccessPage extends StatelessWidget {
         ElevatedButton(
             onPressed: () async {
               if (await user.deleteUser()) {
+                // ignore: use_build_context_synchronously
                 await _showDialog('User Deleted', context);
                 // ignore: use_build_context_synchronously
                 _goHome(context);
@@ -143,6 +147,7 @@ class LoginSuccessPage extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const StartPage()),
-        (Route<dynamic> route) => false);
+        // (Route<dynamic> route) => false
+        ModalRoute.withName('/'));
   }
 }

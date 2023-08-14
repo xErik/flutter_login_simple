@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_simple/src/screenservice.dart';
 import 'package:flutter_login_simple/src/view/login.dart';
-import 'package:flutter_login_simple/src/view/passwordCode.dart';
-import 'package:flutter_login_simple/src/view/passwordForgotten.dart';
+import 'package:flutter_login_simple/src/view/password_code.dart';
+import 'package:flutter_login_simple/src/view/password_forgotten.dart';
 import 'package:flutter_login_simple/src/view/signup.dart';
 import 'package:get/get.dart';
 

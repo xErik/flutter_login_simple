@@ -55,7 +55,8 @@ onLoginSuccess(UserSessionData user) {
   Navigator.pushAndRemoveUntil(context,
       MaterialPageRoute(builder: (context) 
         => LoginSuccessPage(user)),
-      (Route<dynamic> route) => false);
+      ModalRoute.withName('/')
+      );
 }
 
 // Your Terms of Service

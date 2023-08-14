@@ -25,3 +25,7 @@
 ## [1.0.0] - [April 09 2023].
 
 * Updated Firebase dependencies, removed firebase_desktop 
+
+## [1.0.1] - [August 14 2023].
+
+* Issue: https://github.com/xErik/flutter_login_simple/issues/1 

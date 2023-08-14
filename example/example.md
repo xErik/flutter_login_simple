@@ -1,8 +1,8 @@
 ```dart
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_simple/authmodelpublic.dart';
 import 'package:flutter_login_simple/main.dart';
+import 'package:flutter_login_simple/usersessiondata.dart';
 import 'package:flutter_login_simple_demo/firebase_options.dart';
 
 void main() async {
@@ -44,6 +44,7 @@ class StartPage extends StatelessWidget {
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(builder: (context) => const LoginSuccessPage()),
+    //   ModalRoute.withName('/')
     // );
     // }
     //
@@ -61,8 +62,11 @@ class StartPage extends StatelessWidget {
     onLoginSuccess(UserSessionData user) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LoginSuccessPage(user)),
-          (Route<dynamic> route) => false);
+          MaterialPageRoute(
+              builder: (BuildContext context) => LoginSuccessPage(user)),
+          ModalRoute.withName('/')
+          // (Route<dynamic> route) => false
+          );
     }
 
     // The Terms of Service (as HTML) shown in a fullscreen dialog.
@@ -74,7 +78,7 @@ class StartPage extends StatelessWidget {
     var config =
         FlutterLoginConfiguration(logo, onLoginSuccess, htmlToc, htmlPrivacy);
 
-    return LoginStarter(config);
+    return FlutterLoginSimple(config);
   }
 }
 
@@ -119,6 +123,7 @@ class LoginSuccessPage extends StatelessWidget {
         ElevatedButton(
             onPressed: () async {
               if (await user.deleteUser()) {
+                // ignore: use_build_context_synchronously
                 await _showDialog('User Deleted', context);
                 // ignore: use_build_context_synchronously
                 _goHome(context);
@@ -144,7 +149,8 @@ class LoginSuccessPage extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const StartPage()),
-        (Route<dynamic> route) => false);
+        // (Route<dynamic> route) => false
+        ModalRoute.withName('/'));
   }
 }
 ```
